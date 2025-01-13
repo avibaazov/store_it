@@ -95,9 +95,10 @@ export const getCurrentUser = async () => {
     }
     return parseStringify(user.documents[0]);
   } catch (error) {
-    handleError(error, "Failed to retrieve current user");
+    console.log(error);
   }
 };
+
 export const signOutUser = async () => {
   const { account } = await createSessionClient();
 

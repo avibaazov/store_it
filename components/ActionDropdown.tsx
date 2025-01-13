@@ -53,23 +53,31 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
   const handleAction = async () => {
     if (!action) return;
     setIsLoading(true);
-    let success = false;
-
-    const actions = {
-      rename: () =>
-        renameFile({ fileId: file.$id, name, extension: file.extension, path }),
-      share: () => updateFileUsers({ fileId: file.$id, emails, path }),
-      delete: () =>
-        deleteFile({ fileId: file.$id, bucketFileId: file.bucketFileId, path }),
-    };
-
-    success = await actions[action.value as keyof typeof actions]();
-
-    if (success) closeAllModals();
-
+    try {
+      let success = false;
+      const actions = {
+        rename: () =>
+          renameFile({
+            fileId: file.$id,
+            name,
+            extension: file.extension,
+            path,
+          }),
+        share: () => updateFileUsers({ fileId: file.$id, emails, path }),
+        delete: () =>
+          deleteFile({
+            fileId: file.$id,
+            bucketFileId: file.bucketFileId,
+            path,
+          }),
+      };
+      success = await actions[action.value as keyof typeof actions]();
+      if (success) closeAllModals();
+    } catch (error) {
+      console.error(error);
+    }
     setIsLoading(false);
   };
-
   const handleRemoveUser = async (email: string) => {
     const updatedEmails = emails.filter((e) => e !== email);
 
