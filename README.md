@@ -1,6 +1,6 @@
 <div align="center">
   <br />
-    <a href="https://youtu.be/lie0cr3wESQ" target="_blank">
+    <a href="https://store-it-nine-lime.vercel.app/sign-in" target="_blank">
       <img src="https://i.ibb.co/wR9G2k3/Readme-Thumbnail.png" alt="Project Banner">
     </a>
   <br />
