@@ -148,9 +148,29 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
   };
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
-        <DropdownMenuTrigger className="shad-no-focus">
+    <Dialog
+      open={isModalOpen}
+      onOpenChange={(open) => {
+        setIsModalOpen(open);
+        if (!open) {
+          setAction(null);
+          setName(file.name);
+          document.body.style.pointerEvents = "";
+        }
+      }}
+    >
+      <DropdownMenu
+        modal={false}
+        open={isDropdownOpen}
+        onOpenChange={setIsDropdownOpen}
+      >
+        <DropdownMenuTrigger
+          className="shad-no-focus"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+        >
           <Image
             src="/assets/icons/dots.svg"
             alt="dots"
